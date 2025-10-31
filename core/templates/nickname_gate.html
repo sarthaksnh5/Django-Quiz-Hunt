@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="bg-slate-800 rounded-lg p-6">
+  <h2 class="text-xl font-semibold mb-4">Enter Nickname and PIN</h2>
+  <p class="mb-4">Accessing: {{ question.title }}</p>
+  <form method="post" class="space-y-4">
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+    <div>
+      <label class="block mb-1" for="id_nickname">Nickname</label>
+      {{ form.nickname }}
+    </div>
+    <div>
+      <label class="block mb-1" for="id_pin_code">PIN</label>
+      {{ form.pin_code }}
+    </div>
+    {% if form.errors %}
+    <div class="text-red-400 text-sm">Invalid nickname or PIN.</div>
+    {% endif %}
+    <button class="bg-emerald-500 hover:bg-emerald-600 text-white px-4 py-2 rounded" type="submit">Continue</button>
+  </form>
+</div>
+{% endblock %}

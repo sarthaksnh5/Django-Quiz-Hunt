@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="bg-slate-800 rounded-lg p-6">
+  <h2 class="text-xl font-semibold mb-4">Registration</h2>
+
+  {% if success %}
+    <div class="mb-4">
+      <p class="mb-2">Your nickname:</p>
+      <div class="font-mono bg-slate-900 px-3 py-2 rounded inline-block">{{ nickname }}</div>
+    </div>
+    <div class="mb-4">
+      <p class="mb-2">Your PIN (shown only once):</p>
+      <div class="font-mono bg-slate-900 px-3 py-2 rounded inline-block">{{ pin }}</div>
+      <p class="text-red-400 mt-2">Save this now; it will not be shown again.</p>
+    </div>
+    <a href="/" class="text-emerald-400 underline">Go to Home</a>
+  {% else %}
+    <form method="post" class="space-y-4">
+      {% csrf_token %}
+      {{ form.non_field_errors }}
+      <div>
+        <label class="block mb-1" for="id_name">Name</label>
+        {{ form.name }}
+      </div>
+      <div>
+        <label class="block mb-1" for="id_school_name">School Name</label>
+        {{ form.school_name }}
+      </div>
+      <div>
+        <label class="block mb-1" for="id_phone_number">Phone Number (optional)</label>
+        {{ form.phone_number }}
+      </div>
+      {% if form.errors %}
+      <div class="text-red-400 text-sm">
+        Please fix the errors and try again.
+      </div>
+      {% endif %}
+      <button class="bg-emerald-500 hover:bg-emerald-600 text-white px-4 py-2 rounded" type="submit">Register</button>
+    </form>
+  {% endif %}
+</div>
+
+{% endblock %}

@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="bg-slate-800 rounded-lg p-6">
+  <h2 class="text-xl font-semibold mb-4">Answer Submitted</h2>
+  <p class="mb-2">Your answer was recorded.</p>
+  <p class="text-sm text-slate-300">Remaining submissions: {{ remaining }}</p>
+  <a href="/" class="inline-block mt-4 text-emerald-400 underline">Back to Home</a>
+</div>
+{% endblock %}

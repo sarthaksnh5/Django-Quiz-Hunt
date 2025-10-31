@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en" class="h-full">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Quiz Hunt</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Dark theme friendly form controls */
+    input[type="text"], input[type="tel"], input[type="password"], input[type="number"], input[type="email"],
+    input[type="url"], textarea, select {
+      color: #e2e8f0;            /* slate-200 */
+      background-color: #0f172a; /* slate-900 */
+      border: 1px solid #334155; /* slate-700 */
+      padding: 0.5rem 0.75rem;
+      border-radius: 0.375rem;   /* rounded-md */
+      width: 100%;
+    }
+    input::placeholder, textarea::placeholder { color: #94a3b8; } /* slate-400 */
+    label { color: #e2e8f0; }
+  </style>
+</head>
+<body class="min-h-full bg-slate-900 text-slate-100">
+  <div class="max-w-3xl mx-auto p-4">
+    <header class="mb-6 flex items-center justify-between">
+      <h1 class="text-2xl font-bold">Quiz Hunt</h1>
+      {% if current_contestant %}
+      <div class="text-sm text-slate-300">
+        Logged in as <span class="font-semibold text-slate-100">{{ current_contestant.nickname }}</span>
+        <a href="{% url 'logout' %}" class="ml-3 text-rose-400 underline">Logout</a>
+      </div>
+      {% endif %}
+    </header>
+    {% block content %}{% endblock %}
+  </div>
+</body>
+</html>

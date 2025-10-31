@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="bg-slate-800 rounded-lg p-6">
+  <h2 class="text-xl font-semibold mb-4">{{ question.title }}</h2>
+  {% if question.body %}
+  <p class="mb-4">{{ question.body }}</p>
+  {% endif %}
+
+  {% if question.images.all %}
+  <div class="grid grid-cols-2 gap-4 mb-4">
+    {% for img in question.images.all %}
+      <img class="rounded" src="{{ img.image.url }}" alt="Question image" />
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  {% if existing %}
+    <div class="text-amber-400 mb-4">{{ contestant.nickname }}, you already submitted an answer for this question.</div>
+  {% endif %}
+
+  {% if limit_reached %}
+    <div class="text-red-400">You have reached your submission limit.</div>
+  {% else %}
+    {% if not existing %}
+    <form method="post" action="{% url 'submit_answer' question.id %}" class="space-y-4">
+      {% csrf_token %}
+      {{ form.non_field_errors }}
+      <div class="space-y-2">
+        {% for choice in question.choices.all %}
+        <label class="flex items-center gap-2">
+          <input type="radio" name="choice_id" value="{{ choice.id }}" class="accent-emerald-500" />
+          <span>{{ choice.text }}</span>
+        </label>
+        {% endfor %}
+      </div>
+      <div class="text-sm text-slate-300">Remaining after this submission: {{ remaining_after }}</div>
+      <button class="bg-emerald-500 hover:bg-emerald-600 text-white px-4 py-2 rounded" type="submit">Submit</button>
+    </form>
+    {% endif %}
+  {% endif %}
+</div>
+{% endblock %}
