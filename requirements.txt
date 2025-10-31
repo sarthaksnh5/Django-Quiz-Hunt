@@ -4,6 +4,9 @@ Django>=4.2,<6.0
 # Image Processing
 Pillow>=12.0.0
 
+# QR Code Generation
+qrcode[pil]>=7.4.2
+
 # Django automatically installs these dependencies:
 # - asgiref>=3.8.1
 # - sqlparse>=0.3.1
